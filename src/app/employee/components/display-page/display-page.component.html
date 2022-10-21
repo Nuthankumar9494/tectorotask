@@ -1,0 +1,182 @@
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" routerLink="">
+    <img src="https://www.tectoro.com/img/capital-markets-technology-consulting-hyderabad.png" alt="">
+
+  </a>
+  <a>
+    <button class="btn btn-outline-dark m-3 " routerLink="/employee/userpage"><img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaGYfwgNgkfNypf_EEM6LvkpO6mNwvY81Lzw&usqp=CAU"
+        style="width:25px;"><strong>{{userdata}}</strong></button>
+    <button class="btn btn-outline-danger m-4" (click)="onLogout()">logout</button></a>
+</nav>
+<div class="wrapper">
+  <div class="sidebar">
+      <h2>Tectoro</h2>
+      <ul>
+          <li><a routerLink="/employee/home"  routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+            true}"><i class="fas fa-home"></i>Home</a></li>
+          <li><a routerLink="/employee/service"  routerLinkActive="active"><i class="fas fa-user"></i>Services</a></li>
+          <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+          <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
+          <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
+          <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
+          <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
+      </ul> 
+   
+  </div>
+  <div class="main_content">
+      <div class="header">Welcome!! Have a nice day.</div>  
+      <div class="info">
+        <button class="btn btn-outline-success my-3" data-bs-toggle="modal" data-bs-target="#addEmployee"
+        (click)="onaddemployyeModal()">Add
+        Employee</button>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Name</th>
+            <th scope="col">DESIGNATION</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Working Location</th>
+            <th scope="col">About</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let items of empData">
+            <th scope="row">{{items.id}}</th>
+            <td>{{items.Name}}</td>
+            <td>{{items.Designation}}</td>
+            <td>{{items.MobileNumber}}</td>
+            <td>{{items.email}}</td>
+            <td>{{items.fewlines}}</td>
+            <td>{{items.Location}}</td>
+            <td>
+              <button class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#addEmployee"
+                (click)="id(items.id)">Edit</button>
+              <button class="btn btn-outline-danger  mx-2" (click)="delete()">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top:50px;">
+
+ 
+  <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Employee Detailes</h1>
+        
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="postform">
+            <div class="mb-3">
+              <label for="Name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="Name" placeholder="enter your name">
+
+            </div>
+            <div class="mb-3">
+              <label> Location</label>
+              <select class="form-control" formControlName="Location" placeholer="Select Location" value="location"
+                formControlName="Location">
+                <option value="">Select One</option>
+                <option value="HYDERAD">Hyderabad</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Vizag">Vizag</option>
+                <option value="Pune">pune</option>
+                <option value="DELHII">Delhi</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">email</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                formControlName="email">
+
+            </div>
+            <div class="mb-3">
+              <label for="text area" class="form-label">Few lines about your projects worked before</label>
+              <textarea  placeholder="Few Lines" name="FewDetails" formControlName="fewlines"></textarea>
+
+            </div>
+
+            <div class="row">
+
+              <div>
+
+                <strong><label>Core Expertise In</label></strong>
+
+              </div>
+
+              <div>
+
+                <input type="checkbox" name="Core" />
+
+                <label>&nbsp; FrontEnd</label><br>
+
+                <input type="checkbox" name="Core" />
+
+                <label>&nbsp; BackEnd</label><br>
+
+                <input type="checkbox" name="Core" />
+
+                <label>&nbsp; FullStack</label><br>
+
+                <input type="checkbox" name="Core" />
+
+                <label>&nbsp; UI/UX</label>
+
+              </div>
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Designation</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" formControlName="Designation">
+
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Mobile</label>
+              <input type="number" class="form-control" id="exampleInputPassword1" formControlName="MobileNumber">
+            </div>
+
+            <p>Please select your Gender</p>
+              <input type="radio" id="female" name="fav_language" value="HTML">
+              <label for="html">Female</label><br>
+              <input type="radio" id="css" name="fav_language" value="CSS">
+              <label for="css">Male</label><br>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger m-3" data-bs-dismiss="modal" (click)="close()">Close</button>
+          <button type="button" class="btn btn-outline-success m-3" routerLink="/emmployee/display" (click)="onaddpost()"
+            data-bs-dismiss="modal" *ngIf="onaddButton">submit</button>
+          <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" (click)="onedit()"
+            *ngIf="oneditButton">submit</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="page-footer fixed-bottom" style="background-color:black;">
+  <div class="footer">
+      <ul>
+          <img src="https://www.tectoro.com/img/capital-markets-technology-consulting.png" alt="">
+          <li>© 2015. «<a href="">Tectoro Consulting Pvt Ltd.»</a>. All rights reserved.</li>
+          <li>Privacy Policy</li>
+          <li>Term og Use</li>
+      </ul>
+
+  </div>
+
+
+
+</footer>
